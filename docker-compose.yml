@@ -1,0 +1,31 @@
+version: '2.2'
+services:
+  elasticsearch:
+    build: es
+    container_name: elasticsearch
+    environment:
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - esdata1:/usr/share/elasticsearch/data
+      - ./es/config:/usr/share/elasticsearch/config
+    ports:
+      - 9200:9200
+    expose:
+        - 9300
+
+  kibana:
+    build: kibana
+    container_name: kibana
+    links:
+      - elasticsearch:elasticsearch
+    ports:
+      - 5601:5601
+
+volumes:
+  esdata1:
+    driver: local
