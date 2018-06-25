@@ -12,11 +12,10 @@ services:
         hard: -1
     volumes:
       - esdata1:/usr/share/elasticsearch/data
-      - ./es/config:/usr/share/elasticsearch/config
+      - ./es/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - ./es/config/log4j2.properties:/usr/share/elasticsearch/config/log4j2.properties
     ports:
       - 9200:9200
-    expose:
-        - 9300
 
   kibana:
     build: kibana

@@ -1,12 +1,8 @@
 http.host: 0.0.0.0
-network.host: 0.0.0.0
-
-# Uncomment the following lines for a production cluster deployment
-#transport.host: 0.0.0.0
-#discovery.zen.minimum_master_nodes: 1
+#network.host: 0.0.0.0 <-こっちでも起動できた
 
 ### x-pack functions
 xpack.security.enabled: false
 xpack.monitoring.enabled: true
-xpack.graph.enabled: false
+xpack.graph.enabled: true
 xpack.watcher.enabled: false
