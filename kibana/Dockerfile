@@ -1,5 +1,5 @@
-#FROM kibana:6.3.0
-FROM docker.elastic.co/kibana/kibana:6.3.0
+#FROM kibana:6.3.1
+FROM docker.elastic.co/kibana/kibana:6.3.1
 
 # x-pack のインストールは不要
 #```

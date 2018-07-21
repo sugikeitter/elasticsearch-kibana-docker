@@ -8,8 +8,8 @@
 - [Running Kibana on Docker](https://www.elastic.co/guide/en/kibana/current/docker.html)
 
 ## 環境
-- Elasticsearch 6.3.0
-- Kibana 6.3.0
+- Elasticsearch 6.3.1
+- Kibana 6.3.1
 - Docker Compose 1.21.1
 
 ## 必要なファイル

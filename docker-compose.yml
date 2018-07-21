@@ -1,9 +1,10 @@
 version: '2.2'
 services:
-  elasticsearch:
+  elasticsearch01:
     build: es
-    container_name: elasticsearch
+    container_name: elasticsearch01
     environment:
+      - cluster.name=es-cluster
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
     ulimits:
@@ -15,16 +16,45 @@ services:
       - ./es/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
       - ./es/config/log4j2.properties:/usr/share/elasticsearch/config/log4j2.properties
     ports:
-      - 9200:9200
+      - 9201:9200
+    networks:
+      - esnet
 
-  kibana:
+  elasticsearch02:
+    build: es
+    container_name: elasticsearch02
+    environment:
+      - cluster.name=es-cluster
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - esdata2:/usr/share/elasticsearch/data
+      - ./es/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - ./es/config/log4j2.properties:/usr/share/elasticsearch/config/log4j2.properties
+    ports:
+      - 9202:9200
+    networks:
+      - esnet
+
+  kibana01:
     build: kibana
-    container_name: kibana
+    container_name: kibana01
     links:
-      - elasticsearch:elasticsearch
+      - elasticsearch01:elasticsearch
     ports:
       - 5601:5601
+    networks:
+      - esnet
 
 volumes:
   esdata1:
     driver: local
+  esdata2:
+    driver: local
+
+networks:
+  esnet:
