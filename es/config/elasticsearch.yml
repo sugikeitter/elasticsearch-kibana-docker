@@ -1,5 +1,11 @@
-http.host: 0.0.0.0
-#network.host: 0.0.0.0 <-こっちでも起動できた
+#http.host: 0.0.0.0
+network.host: 0.0.0.0
+
+bootstrap.memory_lock: true
+
+# Cluster settings
+cluster.name: es-cluster
+discovery.zen.ping.unicast.hosts: ['elasticsearch01', 'elasticsearch02', 'elasticsearch03']
 
 ### x-pack functions
 xpack.security.enabled: false

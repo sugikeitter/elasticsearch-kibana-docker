@@ -4,17 +4,16 @@ services:
     build: es
     container_name: elasticsearch01
     environment:
-      - cluster.name=es-cluster
-      - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
     ulimits:
       memlock:
         soft: -1
         hard: -1
     volumes:
-      - esdata1:/usr/share/elasticsearch/data
+      - esdata01:/usr/share/elasticsearch/data
       - ./es/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
       - ./es/config/log4j2.properties:/usr/share/elasticsearch/config/log4j2.properties
+#      - ./es/config/jvm.options:/usr/share/elasticsearch/config/jvm.options
     ports:
       - 9201:9200
     networks:
@@ -24,19 +23,37 @@ services:
     build: es
     container_name: elasticsearch02
     environment:
-      - cluster.name=es-cluster
-      - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
     ulimits:
       memlock:
         soft: -1
         hard: -1
     volumes:
-      - esdata2:/usr/share/elasticsearch/data
+      - esdata02:/usr/share/elasticsearch/data
       - ./es/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
       - ./es/config/log4j2.properties:/usr/share/elasticsearch/config/log4j2.properties
+#      - ./es/config/jvm.options:/usr/share/elasticsearch/config/jvm.options
     ports:
       - 9202:9200
+    networks:
+      - esnet
+
+  elasticsearch03:
+    build: es
+    container_name: elasticsearch03
+    environment:
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - esdata03:/usr/share/elasticsearch/data
+      - ./es/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - ./es/config/log4j2.properties:/usr/share/elasticsearch/config/log4j2.properties
+#      - ./es/config/jvm.options:/usr/share/elasticsearch/config/jvm.options
+    ports:
+      - 9203:9200
     networks:
       - esnet
 
@@ -51,9 +68,11 @@ services:
       - esnet
 
 volumes:
-  esdata1:
+  esdata01:
     driver: local
-  esdata2:
+  esdata02:
+    driver: local
+  esdata03:
     driver: local
 
 networks:
