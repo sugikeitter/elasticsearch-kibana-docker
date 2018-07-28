@@ -8,7 +8,6 @@
 - https://github.com/sugikeitter/elasticsearch-kibana-docker
 
 ## 参考
-こちらを参考にした
 - [Install Elasticsearch with Docker](https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html)
 - [Running Kibana on Docker](https://www.elastic.co/guide/en/kibana/current/docker.html)
 - [Compose file version 3 reference](https://docs.docker.com/compose/compose-file/)
