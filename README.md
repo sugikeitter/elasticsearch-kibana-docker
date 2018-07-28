@@ -73,14 +73,14 @@ docker-compose up
 
 #### volumes
 - ホスト側のファイルをコンテナ側へ渡したりできる
-- `HOST:CONTAINER`
+  - `HOST:CONTAINER`
 - トップレベルの`volumes`に名前を定義することで以下のことができる
   - 複数サービスをまたがってボリュームを利用
   - ホスト側へデータを永続化
 
 #### port
 - 公開するポートの設定
-- `HOST:CONTAINER`
+  - `{HOST}:{CONTAINER}`とすると`localhost:{HOST}`へアクセスすると、`container:{CONTAINER}`に繋がる
 
 #### networks
 - composeの中でさらにネットワークを分けられる設定
