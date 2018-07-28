@@ -1,7 +1,7 @@
-version: '2.2'
+version: '3.7'
 services:
   elasticsearch01:
-    build: es
+    build: ./es
     container_name: elasticsearch01
     environment:
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
@@ -20,7 +20,7 @@ services:
       - esnet
 
   elasticsearch02:
-    build: es
+    build: ./es
     container_name: elasticsearch02
     environment:
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
@@ -39,7 +39,7 @@ services:
       - esnet
 
   elasticsearch03:
-    build: es
+    build: ./es
     container_name: elasticsearch03
     environment:
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
@@ -58,7 +58,7 @@ services:
       - esnet
 
   kibana01:
-    build: kibana
+    build: ./kibana
     container_name: kibana01
     links:
       - elasticsearch01:elasticsearch
