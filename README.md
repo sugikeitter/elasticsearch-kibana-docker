@@ -5,13 +5,18 @@
 - `Kibana`も立ち上げて、`Elasticsearch`と連携させた
 - `Docker Compose`の設定値について、自分の理解した内容をまとめた
 
+### 更新履歴
+- 2020/06/07
+ - Elasctic Stackのver.を`6.3.1`=>`7.7`へ変更
+ - Docker Compose(Mac)のver.を`1.22.0`=>`1.25.5`で動作確認
+
 ## GitHub
 - https://github.com/sugikeitter/elasticsearch-kibana-docker
 
 ## 環境
-- Elasticsearch 6.3.1
-- Kibana 6.3.1
-- Docker Compose 1.22.0
+- Elasticsearch 7.7.1
+- Kibana 7.7.1
+- Docker Compose 1.25.5
 
 ## 必要なファイル
 ```
@@ -24,6 +29,8 @@
 │       └── log4j2.properties  # 必要に応じて設定を追記する
 └── kibana
     └── Dockerfile
+    └── config
+        └── kibana.yml # 必要に応じて設定を追記する
 ```
 
 ## 動作確認
@@ -53,6 +60,7 @@ $ docker-compose up
 - この下にコンテナを定義していく
 - **ここで定義したservice名はコンテナ間で通信する時のホスト名のような役割になる**
   - 下で出てくる`container_name`と違い、`Docker Compose`で利用される名称
+  - ElasticSearchの設定である`node.name`や`discovery.seed_hosts`の値をコンテナ間の通信する時の名前として利用するようなので、**serviceの名前とこの設定値は合わせておいた方が良い**
 - 今回の場合だと`es01`, `es02`, `es03`, `kibana01`という4つ定義している
 
 ### build
