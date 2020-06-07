@@ -1,9 +1,11 @@
 version: '3.7'
 services:
-  elasticsearch01:
+  es01:
     build: ./es
-    container_name: elasticsearch01
+    container_name: es01
     environment:
+      - node.name=es01
+      - discovery.seed_hosts=es02,es03
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
     ulimits:
       memlock:
@@ -19,10 +21,12 @@ services:
     networks:
       - esnet
 
-  elasticsearch02:
+  es02:
     build: ./es
-    container_name: elasticsearch02
+    container_name: es02
     environment:
+      - node.name=es02
+      - discovery.seed_hosts=es03,es01
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
     ulimits:
       memlock:
@@ -38,10 +42,12 @@ services:
     networks:
       - esnet
 
-  elasticsearch03:
+  es03:
     build: ./es
-    container_name: elasticsearch03
+    container_name: es03
     environment:
+      - node.name=es03
+      - discovery.seed_hosts=es01,es02
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
     ulimits:
       memlock:
@@ -61,11 +67,14 @@ services:
     build: ./kibana
     container_name: kibana01
     links:
-      - elasticsearch01:elasticsearch
+      - es01:elasticsearch
     ports:
       - 5601:5601
     networks:
       - esnet
+#    volumes:
+#      - ./kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml
+
 
 volumes:
   esdata01:
@@ -77,3 +86,4 @@ volumes:
 
 networks:
   esnet:
+    driver: bridge
