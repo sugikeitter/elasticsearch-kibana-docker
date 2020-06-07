@@ -53,7 +53,7 @@ $ docker-compose up
 - この下にコンテナを定義していく
 - **ここで定義したservice名はコンテナ間で通信する時のホスト名のような役割になる**
   - 下で出てくる`container_name`と違い、`Docker Compose`で利用される名称
-- 今回の場合だと`elasticsearch01`, `elasticsearch02`, `elasticsearch03`, `kibana01`という4つ定義している
+- 今回の場合だと`es01`, `es02`, `es03`, `kibana01`という4つ定義している
 
 ### build
 - 指定したディレクトリのDockerfileを利用してコンテナを起動させることができる
@@ -84,10 +84,10 @@ $ docker-compose up
 ### port
 - 公開するポートの設定
 - `HOST:CONTAINER`の順で設定
-- 今回は`elasticsearch0*`はそれぞれポート`9200`を利用してプロセスを立ち上げているが、ホストマシン経由でコンテナへアクセスする場合に`localhost:920[1,2,3]`でそれぞれのコンテナの`Elasticsearch`へアクセスできるように設定している
-  - `localhost:9201`->`elasticsearch01:9200`
-  - `localhost:9202`->`elasticsearch02:9200`
-  - `localhost:9203`->`elasticsearch03:9200`
+- 今回は`es0*`はそれぞれポート`9200`を利用してプロセスを立ち上げているが、ホストマシン経由でコンテナへアクセスする場合に`localhost:920[1,2,3]`でそれぞれのコンテナの`Elasticsearch`へアクセスできるように設定している
+  - `localhost:9201`->`es01:9200`
+  - `localhost:9202`->`es02:9200`
+  - `localhost:9203`->`es03:9200`
 
 ### networks
 - `Docker Compose`の中でさらにネットワークを分けられる設定
