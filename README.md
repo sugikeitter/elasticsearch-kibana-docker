@@ -7,8 +7,8 @@
 
 ### 更新履歴
 - 2020/06/07
- - Elasctic Stackのver.を`6.3.1`=>`7.7`へ変更
- - Docker Compose(Mac)のver.を`1.22.0`=>`1.25.5`で動作確認
+  - Elasctic Stackのver.を`6.3.1`=>`7.7`へ変更
+  - Docker Compose(Mac)のver.を`1.22.0`=>`1.25.5`で動作確認
 
 ## GitHub
 - https://github.com/sugikeitter/elasticsearch-kibana-docker
