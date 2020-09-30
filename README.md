@@ -6,6 +6,9 @@
 - `Docker Compose`の設定値について、自分の理解した内容をまとめた
 
 ### 更新履歴
+- 2020/09/17
+  - Elasctic Stackのver.を`7.7`=>`7.9.1`へ変更
+  - Docker Compose(Mac)のver.を`1.25.5`=>`1.27.2`で動作確認
 - 2020/06/07
   - Elasctic Stackのver.を`6.3.1`=>`7.7`へ変更
   - Docker Compose(Mac)のver.を`1.22.0`=>`1.25.5`で動作確認
@@ -14,9 +17,9 @@
 - https://github.com/sugikeitter/elasticsearch-kibana-docker
 
 ## 環境
-- Elasticsearch 7.7.1
-- Kibana 7.7.1
-- Docker Compose 1.25.5
+- Elasticsearch 7.9.1
+- Kibana 7.9.1
+- Docker Compose 1.27.2
 
 ## 必要なファイル
 ```
