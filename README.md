@@ -51,7 +51,7 @@ $ docker-compose up
 $ docker-compose down
 
 ## クラスターを停止して起動したリソースを削除
-$ docker-compose down
+$ docker-compose down -v
 ```
 
 ### 起動時のよくあるエラー
