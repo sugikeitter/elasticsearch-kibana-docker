@@ -64,7 +64,13 @@ $ sysctl -w vm.max_map_count=262144
 ```
 
 ### Kibanaへ接続
-ブラウザで`http://localhost:5601/`へアクセス
+- ブラウザで`http://localhost:5601/`へアクセスすると、起動に成功している場合は以下の画面が表示される
+<img src="https://user-images.githubusercontent.com/8069859/158031489-86f87e0e-162b-49f5-8a71-328b6928c1e9.png" width="480px">
+
+- 以下を入力して「Log in」
+  - Username : elastic
+  - Password : `.env` ファイルの `ELASTIC_PASSWORD` に設定した値
+
 
 ## docker-compose.ymlの設定について
 [今回作成したdocker-compose.ymlはこちら](https://github.com/sugikeitter/elasticsearch-kibana-docker/blob/master/docker-compose.yml)
