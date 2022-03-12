@@ -41,6 +41,9 @@
 $ git clone https://github.com/sugikeitter/elasticsearch-kibana-docker.git
 $ cd elasticsearch-kibana-docker
 
+## ELASTIC_PASSWORD と KIBANA_PASSWORD を設定
+vi .env
+
 ## docker-compose.ymlからDockerイメージをビルドして起動
 $ docker-compose up -d
 
