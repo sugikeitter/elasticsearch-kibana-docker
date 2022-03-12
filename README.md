@@ -6,6 +6,8 @@
 - `Docker Compose`の設定値について、自分の理解した内容をまとめた
 
 ### 更新履歴
+- 2022/03/13
+  - Elasctic Stackのver.を`7.9.1`=>`8.1.0`へ変更
 - 2020/09/17
   - Elasctic Stackのver.を`7.7`=>`7.9.1`へ変更
   - Docker Compose(Mac)のver.を`1.25.5`=>`1.27.2`で動作確認
@@ -17,23 +19,16 @@
 - https://github.com/sugikeitter/elasticsearch-kibana-docker
 
 ## 環境
-- Elasticsearch 7.9.1
-- Kibana 7.9.1
-- Docker Compose 1.27.2
+- Elasticsearch 8.1.0
+- Kibana 8.1.0
+- Docker version 20.10.7
+- Docker Compose 1.29.2
 
 ## 必要なファイル
 ```
 .
 ├── docker-compose.yml
-├── es
-│   ├── Dockerfile
-│   └── config
-│       ├── elasticsearch.yml  # 必要に応じて設定を追記する
-│       └── log4j2.properties  # 必要に応じて設定を追記する
-└── kibana
-    └── Dockerfile
-    └── config
-        └── kibana.yml # 必要に応じて設定を追記する
+└── .env # PASSWORD の設定が必要
 ```
 
 ## 動作確認
@@ -43,14 +38,26 @@
 
 ```shell
 ## リポジトリをcloneして、docker-compose.ymlが配置されているディレクトリに移動
-$ git clone git@github.com:sugikeitter/elasticsearch-kibana-docker.git
+$ git clone https://github.com/sugikeitter/elasticsearch-kibana-docker.git
 $ cd elasticsearch-kibana-docker
 
-## docker-compose.ymlからDockerイメージをビルド
-$ docker-compose build
+## docker-compose.ymlからDockerイメージをビルドして起動
+$ docker-compose up -d
 
-## ビルドが成功したらコンテナ起動
+## docker-compose.ymlからDockerイメージをビルドして起動（起動時のログが見たい場合）
 $ docker-compose up
+
+## クラスターを停止
+$ docker-compose down
+
+## クラスターを停止して起動したリソースを削除
+$ docker-compose down
+```
+
+### 起動時のよくあるエラー
+- `docker-compose up` して `max virtual memory areas vm.max_map_count [XXXXX] is too low, increase to at least [262144]` が出た場合、以下の設定でカーネル設定を変更する
+```shell
+$ sysctl -w vm.max_map_count=262144
 ```
 
 ### Kibanaへ接続
@@ -65,16 +72,6 @@ $ docker-compose up
   - 下で出てくる`container_name`と違い、`Docker Compose`で利用される名称
   - ElasticSearchの設定である`node.name`や`discovery.seed_hosts`の値をコンテナ間の通信する時の名前として利用するようなので、**serviceの名前とこの設定値は合わせておいた方が良い**
 - 今回の場合だと`es01`, `es02`, `es03`, `kibana01`という4つ定義している
-
-### build
-- 指定したディレクトリのDockerfileを利用してコンテナを起動させることができる
-- `Elasticsearch`プロセス用のコンテナは3つあるが、今回は3つとも利用するDockerイメージは同じにしているため、全て`./es`を指定する
-  - つまり`./es/Dockerfile`からコンテナを起動する
-- `Kibana`プロセス用のコンテナは`./kibana`を指定し、`./kibana/Dockerfile`からコンテナを起動する
-
-### container_name
-- `docker ps`した時に表示されるdockerコンテナの名前
-- `Docker Compose`ではなく`Docker`側の機能で、**同一ホストマシン上では同じ名前のコンテナは複数起動できないので注意**
 
 ### environment
 - 環境変数を追加することができる
@@ -99,12 +96,6 @@ $ docker-compose up
   - `localhost:9201`->`es01:9200`
   - `localhost:9202`->`es02:9200`
   - `localhost:9203`->`es03:9200`
-
-### networks
-- `Docker Compose`の中でさらにネットワークを分けられる設定
-- トップレベルの`networks`にキーを設定しておき、serviceごとの`networks`でそれを利用することができる
-- これをserviceに設定すると、同じキーを設定していないserviceからは接続できない
-  - 最初`kibana01`で`networks`を設定していなかったので`Kibana`->`Elasticsearch`へ接続できなくてハマった
 
 ## 参考
 - [Install Elasticsearch with Docker](https://www.elastic.co/guide/en/elasticsearch/reference/current/docker.html)
